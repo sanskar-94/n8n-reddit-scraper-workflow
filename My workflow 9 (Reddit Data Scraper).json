@@ -1,0 +1,863 @@
+{
+  "name": "My workflow 9 (Reddit Data Scraper)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 11
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -940,
+        740
+      ],
+      "id": "ed9908f6-eb29-4cb4-8f92-8a57aac56ee5",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "subreddit": "technology",
+        "limit": 3,
+        "filters": {
+          "category": "new"
+        }
+      },
+      "type": "n8n-nodes-base.reddit",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        740
+      ],
+      "id": "eaf9feed-783f-47ee-a477-fe0731982fe4",
+      "name": "Reddit",
+      "alwaysOutputData": false,
+      "credentials": {
+        "redditOAuth2Api": {
+          "id": "tbgoVUXMKMarbutQ",
+          "name": "Reddit account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a JSON-only extractor.Give separate output for each posts.\n\nCheck the Reddit post below. If 'upvote_ratio' is greater than 0.93, return structured JSON with:\n\n- title  \n- author  \n- score  \n- upvote_ratio  \n- summary (in one line)\n\nIf `upvote_ratio` is 0.93 or less, return:\n{ \"skip\": true }\n\n### Reddit Post:\nTitle: {{$json[\"title\"]}}\nAuthor: {{$json[\"author\"]}}\nScore: {{$json[\"score\"]}}\nUpvote Ratio: {{$json[\"upvote_ratio\"]}}\nText: {{$json[\"selftext\"] || 'No body text available'}}\n\n### Format:\n{\n  \"title\": \"...\",\n  \"author\": \"...\",\n  \"score\": ...,\n  \"upvote_ratio\": ...,\n  \"summary\": \"...\"\n}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        640
+      ],
+      "id": "72d0cdb5-c85b-4d6b-b48b-27dffae4d0a1",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-1.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -152,
+        860
+      ],
+      "id": "23697731-c4d0-482a-8fdd-9bfdfa34507a",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "RhAFpG5oTPYWPlmB",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "subreddit": "Finance",
+        "limit": 3,
+        "filters": {
+          "category": "new"
+        }
+      },
+      "type": "n8n-nodes-base.reddit",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        1140
+      ],
+      "id": "aa57d420-319d-4763-99de-f96abdb63497",
+      "name": "Reddit1",
+      "alwaysOutputData": false,
+      "credentials": {
+        "redditOAuth2Api": {
+          "id": "tbgoVUXMKMarbutQ",
+          "name": "Reddit account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "subreddit": "ArtificialInteligence",
+        "limit": 3,
+        "filters": {
+          "category": "new"
+        }
+      },
+      "type": "n8n-nodes-base.reddit",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        340
+      ],
+      "id": "5b7faaab-3e43-4696-a2ae-07279e5dd201",
+      "name": "Reddit2",
+      "alwaysOutputData": false,
+      "credentials": {
+        "redditOAuth2Api": {
+          "id": "tbgoVUXMKMarbutQ",
+          "name": "Reddit account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a JSON-only extractor.Give separate output for each posts.\n\nCheck the Reddit post below. If 'upvote_ratio' is greater than 0.93, return structured JSON with:\n\n- title  \n- author  \n- score  \n- upvote_ratio  \n- summary (in one line)\n\nIf `upvote_ratio` is 0.93 or less, return:\n{ \"skip\": true }\n\n### Reddit Post:\nTitle: {{$json[\"title\"]}}\nAuthor: {{$json[\"author\"]}}\nScore: {{$json[\"score\"]}}\nUpvote Ratio: {{$json[\"upvote_ratio\"]}}\nText: {{$json[\"selftext\"] || 'No body text available'}}\n\n### Format:\n{\n  \"title\": \"...\",\n  \"author\": \"...\",\n  \"score\": ...,\n  \"upvote_ratio\": ...,\n  \"summary\": \"...\"\n}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        240
+      ],
+      "id": "ec8a7b44-e12b-428d-b12b-f42b420b4b9e",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a JSON-only extractor.Give separate output for each posts.\n\nCheck the Reddit post below. If 'upvote_ratio' is greater than 0.93, return structured JSON with:\n\n- title  \n- author  \n- score  \n- upvote_ratio  \n- summary (in one line)\n\nIf `upvote_ratio` is 0.93 or less, return:\n{ \"skip\": true }\n\n### Reddit Post:\nTitle: {{$json[\"title\"]}}\nAuthor: {{$json[\"author\"]}}\nScore: {{$json[\"score\"]}}\nUpvote Ratio: {{$json[\"upvote_ratio\"]}}\nText: {{$json[\"selftext\"] || 'No body text available'}}\n\n### Format:\n{\n  \"title\": \"...\",\n  \"author\": \"...\",\n  \"score\": ...,\n  \"upvote_ratio\": ...,\n  \"summary\": \"...\"\n}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        1140
+      ],
+      "id": "77927bce-8a5e-48a3-b735-755951ca0a6c",
+      "name": "AI Agent2"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-1.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -152,
+        460
+      ],
+      "id": "832a429e-dbf1-4054-8ba8-fe358a8f5ea7",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "RhAFpG5oTPYWPlmB",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-1.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -152,
+        1360
+      ],
+      "id": "26c258dc-0274-4d93-a6ee-f7c7795c06fa",
+      "name": "Google Gemini Chat Model2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "RhAFpG5oTPYWPlmB",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const outputItems = [];\n\nfor (const item of items) {\n  const raw = item.json.output || '';\n\n  // Match JSON block inside ```json ... ```\n  const match = raw.match(/```json\\s*([\\s\\S]*?)```/);\n  if (!match) {\n    outputItems.push({ json: { error: true, reason: \"No code block found\", raw } });\n    continue;\n  }\n\n  const jsonString = match[1];\n\n  try {\n    const cleanedJson = jsonString\n      .replace(/(\\r?\\n|\\r)/g, '') // remove line breaks\n      .replace(/“|”/g, '\"')       // replace smart quotes\n      .trim();\n\n    const parsed = JSON.parse(cleanedJson);\n\n    // If GPT returned a single object, push it\n    if (Array.isArray(parsed)) {\n      parsed.forEach(obj => outputItems.push({ json: obj }));\n    } else {\n      outputItems.push({ json: parsed });\n    }\n\n  } catch (error) {\n    outputItems.push({ json: { error: true, reason: \"Failed to parse cleaned JSON\", raw: jsonString } });\n  }\n}\n\nreturn outputItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        136,
+        740
+      ],
+      "id": "ba0bad0a-44f2-4d5b-91ec-1fef1b004783",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const outputItems = [];\n\nfor (const item of items) {\n  const raw = item.json.output || '';\n\n  // Match JSON block inside ```json ... ```\n  const match = raw.match(/```json\\s*([\\s\\S]*?)```/);\n  if (!match) {\n    outputItems.push({ json: { error: true, reason: \"No code block found\", raw } });\n    continue;\n  }\n\n  const jsonString = match[1];\n\n  try {\n    const cleanedJson = jsonString\n      .replace(/(\\r?\\n|\\r)/g, '') // remove line breaks\n      .replace(/“|”/g, '\"')       // replace smart quotes\n      .trim();\n\n    const parsed = JSON.parse(cleanedJson);\n\n    // If GPT returned a single object, push it\n    if (Array.isArray(parsed)) {\n      parsed.forEach(obj => outputItems.push({ json: obj }));\n    } else {\n      outputItems.push({ json: parsed });\n    }\n\n  } catch (error) {\n    outputItems.push({ json: { error: true, reason: \"Failed to parse cleaned JSON\", raw: jsonString } });\n  }\n}\n\nreturn outputItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        136,
+        340
+      ],
+      "id": "55ca19fd-236d-43b7-9b15-0af428e49aed",
+      "name": "Code3"
+    },
+    {
+      "parameters": {
+        "jsCode": "const outputItems = [];\n\nfor (const item of items) {\n  const raw = item.json.output || '';\n\n  // Match JSON block inside ```json ... ```\n  const match = raw.match(/```json\\s*([\\s\\S]*?)```/);\n  if (!match) {\n    outputItems.push({ json: { error: true, reason: \"No code block found\", raw } });\n    continue;\n  }\n\n  const jsonString = match[1];\n\n  try {\n    const cleanedJson = jsonString\n      .replace(/(\\r?\\n|\\r)/g, '') // remove line breaks\n      .replace(/“|”/g, '\"')       // replace smart quotes\n      .trim();\n\n    const parsed = JSON.parse(cleanedJson);\n\n    // If GPT returned a single object, push it\n    if (Array.isArray(parsed)) {\n      parsed.forEach(obj => outputItems.push({ json: obj }));\n    } else {\n      outputItems.push({ json: parsed });\n    }\n\n  } catch (error) {\n    outputItems.push({ json: { error: true, reason: \"Failed to parse cleaned JSON\", raw: jsonString } });\n  }\n}\n\nreturn outputItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        136,
+        1140
+      ],
+      "id": "1d125e4c-aa33-4cf7-8e6e-f447d5022f13",
+      "name": "Code4"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appVHHKsatng2Tsle",
+          "mode": "list",
+          "cachedResultName": "n8n my workflow 9",
+          "cachedResultUrl": "https://airtable.com/appVHHKsatng2Tsle"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl3kAVn8kywaT8kf",
+          "mode": "list",
+          "cachedResultName": "Artificial Intellingence",
+          "cachedResultUrl": "https://airtable.com/appVHHKsatng2Tsle/tbl3kAVn8kywaT8kf"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "summary": "={{ $json.summary }}",
+            "upvote_ratio": "={{ $json.upvote_ratio }}",
+            "score": "={{ $json.score }}",
+            "title": "={{ $json.title }}",
+            "author": "={{ $json.author }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "author",
+              "displayName": "author",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "score",
+              "displayName": "score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "upvote_ratio",
+              "displayName": "upvote_ratio",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "summary",
+              "displayName": "summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        576,
+        340
+      ],
+      "id": "3a13e486-d7f9-4221-afd2-488323dff609",
+      "name": "Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "3ufJXXfEfvDfpLUW",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appVHHKsatng2Tsle",
+          "mode": "list",
+          "cachedResultName": "n8n my workflow 9",
+          "cachedResultUrl": "https://airtable.com/appVHHKsatng2Tsle"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblgLpuWVk7MheR3B",
+          "mode": "list",
+          "cachedResultName": "Tech",
+          "cachedResultUrl": "https://airtable.com/appVHHKsatng2Tsle/tblgLpuWVk7MheR3B"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "upvote_ratio": "={{ $json.upvote_ratio }}",
+            "score": "={{ $json.score }}",
+            "title": "={{ $json.title }}",
+            "author": "={{ $json.author }}",
+            "summary": "={{ $json.summary }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "author",
+              "displayName": "author",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "score",
+              "displayName": "score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "upvote_ratio",
+              "displayName": "upvote_ratio",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "summary",
+              "displayName": "summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        576,
+        740
+      ],
+      "id": "ac6122ca-8d28-420b-b1d9-032a0a2a7213",
+      "name": "Airtable1",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "3ufJXXfEfvDfpLUW",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appVHHKsatng2Tsle",
+          "mode": "list",
+          "cachedResultName": "n8n my workflow 9",
+          "cachedResultUrl": "https://airtable.com/appVHHKsatng2Tsle"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblGEZJtkkDJ5RDwM",
+          "mode": "list",
+          "cachedResultName": "Finance",
+          "cachedResultUrl": "https://airtable.com/appVHHKsatng2Tsle/tblGEZJtkkDJ5RDwM"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "summary": "={{ $json.summary }}",
+            "score": "={{ $json.score }}",
+            "author": "={{ $json.author }}",
+            "title": "={{ $json.title }}",
+            "upvote_ratio": "={{ $json.upvote_ratio }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "author",
+              "displayName": "author",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "score",
+              "displayName": "score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "upvote_ratio",
+              "displayName": "upvote_ratio",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "summary",
+              "displayName": "summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        576,
+        1140
+      ],
+      "id": "f88d4aa0-1bec-4ba5-bf1b-9b2a0fdcf55f",
+      "name": "Airtable2",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "3ufJXXfEfvDfpLUW",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "1518ad39-bbab-4ec9-8e3f-dc1f1319a89e",
+              "leftValue": "={{ $json.skip }}",
+              "rightValue": null,
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        356,
+        340
+      ],
+      "id": "5c1aba7f-84c5-4e2c-bba3-0dfebc3e49a5",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "1518ad39-bbab-4ec9-8e3f-dc1f1319a89e",
+              "leftValue": "={{ $json.skip }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        356,
+        740
+      ],
+      "id": "65410633-41a5-4e69-81a3-6c25b39047d9",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "1518ad39-bbab-4ec9-8e3f-dc1f1319a89e",
+              "leftValue": "={{ $json.skip }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        356,
+        1140
+      ],
+      "id": "184a2510-50a9-4dd8-af68-b31ddf1be973",
+      "name": "If2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Reddit",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Reddit2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Reddit1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reddit": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reddit1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reddit2": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Code3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent2": {
+      "main": [
+        [
+          {
+            "node": "Code4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code3": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code4": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable1": {
+      "main": [
+        []
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Airtable1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Airtable2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "792e9d74-9396-4dab-b724-8fb05823ed72",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f9ed57b20a2befbf008ad9c28f48c6b3ede7ba8dcfeb30bae027d45c91a81498"
+  },
+  "id": "UZyZ0FMeptjFKImR",
+  "tags": []
+}
