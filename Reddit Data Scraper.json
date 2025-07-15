@@ -1,5 +1,5 @@
 {
-  "name": "My workflow 9 (Reddit Data Scraper)",
+  "name": "Reddit Data Scraper",
   "nodes": [
     {
       "parameters": {
@@ -40,7 +40,7 @@
       "alwaysOutputData": false,
       "credentials": {
         "redditOAuth2Api": {
-          "id": "tbgoVUXMKMarbutQ",
+          "id": "REDACTED_REDDIT_ID",
           "name": "Reddit account"
         }
       }
@@ -75,7 +75,7 @@
       "name": "Google Gemini Chat Model",
       "credentials": {
         "googlePalmApi": {
-          "id": "RhAFpG5oTPYWPlmB",
+          "id": "REDACTED_GEMINI_ID",
           "name": "Google Gemini(PaLM) Api account 2"
         }
       }
@@ -100,8 +100,8 @@
       "alwaysOutputData": false,
       "credentials": {
         "redditOAuth2Api": {
-          "id": "tbgoVUXMKMarbutQ",
-          "name": "Reddit account"
+          "id": "REDACTED_REDDIT_ID",
+          "name": "Reddit Account"
         }
       }
     },
@@ -125,7 +125,7 @@
       "alwaysOutputData": false,
       "credentials": {
         "redditOAuth2Api": {
-          "id": "tbgoVUXMKMarbutQ",
+          "id": "REDACTED_REDDIT_ID",
           "name": "Reddit account"
         }
       }
@@ -175,7 +175,7 @@
       "name": "Google Gemini Chat Model1",
       "credentials": {
         "googlePalmApi": {
-          "id": "RhAFpG5oTPYWPlmB",
+          "id": "REDACTED_GEMINI_ID",
           "name": "Google Gemini(PaLM) Api account 2"
         }
       }
@@ -195,7 +195,7 @@
       "name": "Google Gemini Chat Model2",
       "credentials": {
         "googlePalmApi": {
-          "id": "RhAFpG5oTPYWPlmB",
+          "id": "REDACTED_GEMINI_ID",
           "name": "Google Gemini(PaLM) Api account 2"
         }
       }
@@ -246,12 +246,12 @@
           "__rl": true,
           "value": "appVHHKsatng2Tsle",
           "mode": "list",
-          "cachedResultName": "n8n my workflow 9",
+          "cachedResultName": "n8n Reddit Data Scraper",
           "cachedResultUrl": "https://airtable.com/appVHHKsatng2Tsle"
         },
         "table": {
           "__rl": true,
-          "value": "tbl3kAVn8kywaT8kf",
+          "value": "REDACTED_TABLE_AI",
           "mode": "list",
           "cachedResultName": "Artificial Intellingence",
           "cachedResultUrl": "https://airtable.com/appVHHKsatng2Tsle/tbl3kAVn8kywaT8kf"
@@ -338,7 +338,7 @@
       "name": "Airtable",
       "credentials": {
         "airtableTokenApi": {
-          "id": "3ufJXXfEfvDfpLUW",
+          "id": "REDACTED_AIRTABLE_ID",
           "name": "Airtable Personal Access Token account"
         }
       }
@@ -348,14 +348,14 @@
         "operation": "create",
         "base": {
           "__rl": true,
-          "value": "appVHHKsatng2Tsle",
+          "value": "REDACTED_BASE_ID",
           "mode": "list",
-          "cachedResultName": "n8n my workflow 9",
+          "cachedResultName": "n8n Reddit Data Scraper.",
           "cachedResultUrl": "https://airtable.com/appVHHKsatng2Tsle"
         },
         "table": {
           "__rl": true,
-          "value": "tblgLpuWVk7MheR3B",
+          "value": "REDACTED_TABLE_TECH",
           "mode": "list",
           "cachedResultName": "Tech",
           "cachedResultUrl": "https://airtable.com/appVHHKsatng2Tsle/tblgLpuWVk7MheR3B"
@@ -442,7 +442,7 @@
       "name": "Airtable1",
       "credentials": {
         "airtableTokenApi": {
-          "id": "3ufJXXfEfvDfpLUW",
+          "id": "REDACTED_AIRTABLE_ID",
           "name": "Airtable Personal Access Token account"
         }
       }
@@ -452,14 +452,14 @@
         "operation": "create",
         "base": {
           "__rl": true,
-          "value": "appVHHKsatng2Tsle",
+          "value": "REDACTED_BASE_ID",
           "mode": "list",
-          "cachedResultName": "n8n my workflow 9",
+          "cachedResultName": "Reddit Data Scraper",
           "cachedResultUrl": "https://airtable.com/appVHHKsatng2Tsle"
         },
         "table": {
           "__rl": true,
-          "value": "tblGEZJtkkDJ5RDwM",
+          "value": "REDACTED_TABLE_FINANCE",
           "mode": "list",
           "cachedResultName": "Finance",
           "cachedResultUrl": "https://airtable.com/appVHHKsatng2Tsle/tblGEZJtkkDJ5RDwM"
@@ -546,7 +546,7 @@
       "name": "Airtable2",
       "credentials": {
         "airtableTokenApi": {
-          "id": "3ufJXXfEfvDfpLUW",
+          "id": "REDACTED_AIRTABLE_ID",
           "name": "Airtable Personal Access Token account"
         }
       }
